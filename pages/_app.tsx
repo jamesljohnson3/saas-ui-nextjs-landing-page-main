@@ -6,14 +6,13 @@ import { Layout } from 'components/layout'
 import theme from '../theme'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { announcement, header, footer } = pageProps
+  const { announcement, footer } = pageProps
 
   return (
     <SaasProvider theme={theme}>
       <AuthProvider>
         <Layout
           announcementProps={announcement}
-          headerProps={header}
           footerProps={footer}
         >
           <Component {...pageProps} />
