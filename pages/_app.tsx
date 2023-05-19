@@ -2,7 +2,6 @@ import type { AppProps } from 'next/app'
 
 import { AuthProvider, SaasProvider } from '@saas-ui/react'
 import { Layout } from 'components/layout'
-import { SaasProvider } from '@saas-ui/react'
 import '../styles/css/variables.css'
 import '../styles/css/global.css'
 import '../styles/css/scrollbar.css';
