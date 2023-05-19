@@ -71,7 +71,7 @@ const Home: NextPage = () => {
       />
       <Box>
         <HeroSection />
-<Blog/>
+<Blog mediumArticles={undefined}/>
         <HighlightsSection />
 
         <FeaturesSection />
