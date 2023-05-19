@@ -1,48 +1,39 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
+import { useState, useEffect } from "react"
 
-import { compareDesc, format, parseISO } from 'date-fns'
-import { allPosts } from 'contentlayer/generated'
-import { useMDXComponent } from 'next-contentlayer/hooks'
+import Recent 		from '../components/recent'
 
-const Blog: NextPage = ({ posts }: any) => {
-  return (
-    <div className="mx-auto max-w-2xl py-16 text-center">
-      <Head>
-        <title>Contentlayer Blog Example</title>
-      </Head>
+import Color 	from '../components/utils/page.colors.util'
 
-      <h1 className="mb-8 text-3xl font-bold">Contentlayer Blog Example</h1>
+import colors 		from '../content/articles/_colors.json'
+import settings 	from '../content/_settings.json'
 
-      {posts.map((post, idx) => (
-        <PostCard key={idx} {...post} />
-      ))}
-    </div>
-  )
+//
+export default function Articles({ mediumArticles }) {
+	return (
+		<>
+			<Color colors={colors} />
+			<Recent mediumArticles={mediumArticles}/>
+		</>
+	)
 }
 
-function PostCard(post) {
-  return (
-    <div className="mb-6">
-      <time dateTime={post.date} className="block text-sm text-slate-600">
-        {format(parseISO(post.date), 'LLLL d, yyyy')}
-      </time>
-      <h2 className="text-lg">
-        <Link href={post.url}>
-          <a className="text-blue-700 hover:text-blue-900">{post.title}</a>
-        </Link>
-      </h2>
-    </div>
-  )
-}
+// This gets called on every request
+export async function getServerSideProps({ res }) {
 
-export default Blog
+	res.setHeader(
+		'Cache-Control',
+		'public, s-maxage=600, stale-while-revalidate=59'
+	)
 
-export async function getStaticProps() {
-  const posts = allPosts.sort((a, b) => {
-    return compareDesc(new Date(a.date), new Date(b.date))
-  })
-  return { props: { posts } }
+	console.log(settings.username.medium)
+
+	const [ mediumRSS ] = await Promise.all( [
+		fetch(`https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/${settings.username.medium}`),
+	] )
+	
+	let [ mediumArticles ] = await Promise.all( [
+		mediumRSS.json(),
+	] )
+
+	return { props: { mediumArticles } }
 }
