@@ -54,7 +54,6 @@ import { Testimonial, Testimonials } from 'components/testimonials'
 import faq from 'data/faq'
 import testimonials from 'data/testimonials'
 import pricing from 'data/pricing'
-import Blog from './blog'
 
 import {
   Highlights,
@@ -71,7 +70,7 @@ const Home: NextPage = () => {
       />
       <Box>
         <HeroSection />
-<Blog mediumArticles={undefined}/>
+
         <HighlightsSection />
 
         <FeaturesSection />
