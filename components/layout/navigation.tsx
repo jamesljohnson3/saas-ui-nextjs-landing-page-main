@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 
 import siteConfig from 'data/config'
 
-import { NavLink } from 'components/nav-link'
+import  NavLink  from 'components/nav-link'
 
 import { useScrollSpy } from 'hooks/use-scrollspy'
 
