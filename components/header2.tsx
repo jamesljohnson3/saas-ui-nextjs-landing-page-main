@@ -15,10 +15,10 @@ import headerNav from '../data/header-nav'
 import NavLink from '../components/nav-link'
 import { useDisclosure, useUpdateEffect } from '@chakra-ui/react'
 
-import ThemeToggle from './theme-toggle'
+import ThemeToggle from '../components/layout/theme-toggle'
 import { SearchInput, useHotkeys } from '@saas-ui/react'
 
-import { GlobalSearch } from '../components/global-search/global-search'
+import { GlobalSearch } from './global-search/global-search'
 
 const Header = () => {
   const mobileNav = useDisclosure()
