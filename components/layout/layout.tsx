@@ -3,31 +3,32 @@ import { ReactNode } from 'react'
 
 import { SkipNavContent, SkipNavLink } from '@chakra-ui/skip-nav'
 
-import  Header from '../../components/header2'
+import Header, { HeaderProps } from './header'
 import {
   AnnouncementBanner,
   AnnouncementBannerProps,
 } from '../announcement-banner'
-import { Footer, FooterProps } from './footer'
 
 interface LayoutProps {
   children: ReactNode
-  announcementProps: AnnouncementBannerProps
-  footerProps: FooterProps
+  announcement: AnnouncementBannerProps
+  header: HeaderProps
+  footer: ReactNode
 }
 
-export const Layout: React.FC<LayoutProps> = (props) => {
-  const { children, announcementProps, footerProps } = props
+const Layout = ({ children, announcement, header, footer }: LayoutProps) => {
   return (
-    <Box>
+    <Box minH="$100vh">
       <SkipNavLink>Skip to content</SkipNavLink>
-      <AnnouncementBanner {...announcementProps} />
-      <Header />
+      <AnnouncementBanner {...announcement} />
+      <Header {...header} />
       <Box as="main">
         <SkipNavContent />
         {children}
       </Box>
-      <Footer {...footerProps} />
+      {footer}
     </Box>
   )
 }
+
+export default Layout
